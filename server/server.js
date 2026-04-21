@@ -15,15 +15,35 @@ app.use(express.static(path.join(__dirname, 'files')));
    This endpoint returns a sorted array of all the genres of the movies
    that are currently in the movie model.
 */
+app.get('/movies', function (req, res) {
+  let movies = Object.values(movieModel)
+  let requestGenre = req.query.genre;
+  let filteredMovies = [];
+  if (requestGenre) {
+    for (let i = 0; i < movies.length; i++) {
+      if (movies[i].Genres.includes(requestGenre) === true) {
+        filteredMovies.push(movies[i]);
+      }
+    }
+    res.send(filteredMovies);
+  } else {
+    res.send(movies);
+    }
+})
 
+app.get('/genres', function (req, res) {
+  let allGenres = [];
+  for (let genre of Object.values(movieModel)) {
+    allGenres.push(...genre.Genres);
+  }
+  let uniqueGenres = [...new Set(allGenres)];
+  res.send(uniqueGenres.sort());
+
+})
 /* Task 1.4: Extend the GET /movies endpoint:
    When a query parameter for a specific genre is given, 
    return only movies that have the given genre
  */
-app.get('/movies', function (req, res) {
-  let movies = Object.values(movieModel)
-  res.send(movies);
-})
 
 // Configure a 'get' endpoint for a specific movie
 app.get('/movies/:imdbID', function (req, res) {

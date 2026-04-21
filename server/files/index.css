@@ -30,22 +30,71 @@ ul {
 }
 
 /* Task 2.1. Lay out the childs of the 'body' using Grid Template Areas. */
-
-
+header { grid-area: h; }
+nav { grid-area: n; }
+main { grid-area: m; }
+footer { grid-area: f; }
+body {
+  margin: 0;
+  height: 100vh;
+}
+@media (min-width: 768px) {
+  body {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: "h h" "n m" "f f";
+  }
+  main {
+    overflow-y: auto;
+  }
+}
 /* Task 3.1. Make the header element a flex container and center its children
    vertically and horizontally.
  */
-
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 /* Task 3.2. Make the list items of the unordered list in the nav element a flex container, 
    use column direction and center the child items
  */
+nav ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  margin: 0;
+  list-style: none;
+}
+
+nav button {
+  padding: 10px;
+  cursor: pointer;
+}
+
 
 /* Task 3.3. Make the main element a Flexbox container */
 
-
+main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
 /* Task 3.4. Make the footer's ul a Flexbox container */
-
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  list-style: none;
+}
 
 /* From here on styling from exercise 1 */
 img {
@@ -53,11 +102,11 @@ img {
 }
 
 article {
-  background-color: lightgray;
+  background-color: brown;
   border-radius: 16px;
   padding: 16px;
   width: 384px;
-  margin: 8px;
+  color: white;
 }
 
 a {
@@ -70,8 +119,8 @@ span {
 
 .genre {
   padding: 4px 8px;
-  border: solid black 1px;
+  border: solid black 3px;
   border-radius: 6px;
-  background-color: darkgray;
+  background-color: brown;
   font-weight: bold;
 }
